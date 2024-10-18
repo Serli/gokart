@@ -3,6 +3,7 @@ package gokart
 import (
 	"bytes"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"io"
 	"os"
@@ -89,9 +90,47 @@ func ReadTelemetry(filename string, index int) (values []*telemetry.TELEM, err e
 	return
 }
 
+// Timely add time to any type
 type Timely struct {
 	Time  time.Time
 	Value any
+}
+
+// Interpolate from time
+func Interpolate(t time.Time, a, b Timely) (c Timely, err error) {
+	if t.Before(a.Time) {
+		err = errors.New("first interpolation point must be <= time")
+		return
+	}
+	if t.After(b.Time) {
+		err = errors.New("second interpolation point must be >= time")
+		return
+	}
+	w1 := b.Time.Sub(t).Seconds() / b.Time.Sub(a.Time).Seconds()
+	w2 := t.Sub(a.Time).Seconds() / b.Time.Sub(a.Time).Seconds()
+	switch aVal := a.Value.(type) {
+	case GPS5:
+		bVal, ok := b.Value.(GPS5)
+		if !ok {
+			err = fmt.Errorf("can't interpolate between differente types (%T and %T)", a.Value, b.Value)
+			return
+		}
+		c.Time = t
+		gps := GPS5{}
+		gps.Latitude = w1*aVal.Latitude + w2*bVal.Latitude
+		gps.Longitude = w1*aVal.Longitude + w2*bVal.Longitude
+		gps.Altitude = w1*aVal.Altitude + w2*bVal.Altitude
+		gps.Speed = w1*aVal.Speed + w2*bVal.Speed
+		gps.Speed3D = w1*aVal.Speed3D + w2*bVal.Speed3D
+		gps.Accuracy = aVal.Accuracy
+		if bVal.Accuracy > aVal.Accuracy {
+			gps.Accuracy = bVal.Accuracy
+		}
+		c.Value = gps
+	default:
+		err = fmt.Errorf("%T interpolation not yet implemented", a.Value)
+	}
+	return
 }
 
 // GetVideoStartTime, clearly wrong, use first telemery time instead

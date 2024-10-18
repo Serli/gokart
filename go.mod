@@ -5,6 +5,7 @@ go 1.23.2
 require (
 	github.com/stilldavid/gopro-utils v0.0.0-20190102034544-f0186d2edd34
 	github.com/u2takey/ffmpeg-go v0.5.0
+	gocv.io/x/gocv v0.25.0
 )
 
 require (

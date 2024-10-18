@@ -65,7 +65,7 @@ func (l Line) Side(g GPS5) float64 {
 	return -1
 }
 
-// GpsWithTime retrieve GPS5 list, enriched time and accuacy
+// GpsWithTime retrieve GPS5 list, enriched time and accuracy
 func GpsWithTime(values []*telemetry.TELEM) (all []Timely) {
 	all = make([]Timely, 0)
 	for i, v := range values {
