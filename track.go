@@ -13,6 +13,7 @@ import (
 	"time"
 )
 
+// TILE_SIZE size of tile used for map
 const TILE_SIZE = 512
 
 var (
@@ -25,38 +26,47 @@ var (
 	orange = color.RGBA{255, 180, 0, 255}
 )
 
+// Track informations like start lines sectors...
+// Also some logos for overlay option
 type Track struct {
-	Name     string
-	LogoFile string
-	LogoMask string
-	Map      *image.RGBA
-	Start    Line
-	Sectors  []Line
-	Limits   Line
+	Name     string      `json:"name"`
+	LogoFile string      `json:"logofile,omitempty"`
+	LogoMask string      `json:"logomask,omitempty"`
+	Map      *image.RGBA `json:"map,omitempty"`
+	Start    Line        `json:"start"`
+	Sectors  []Line      `json:"sectors"`
+	Limits   Line        `json:"limits"`
 }
 
+// SetLimits, update track bounding box
+// used for map overlay
 func (t *Track) SetLimits(limits Line) {
 	t.Limits = limits
 	// for debug
 	log.Println(t.Name, "New Limits", limits)
 }
 
+// To distance to start line
 func (t Track) To(g GPS5) float64 {
 	return t.Start.To(g)
 }
 
+// NewLapStart do we cross start line and when
 func (t Track) NewLapStart(g1, g2 Timely) (start time.Time) {
 	return Crossed(t.Start, g1, g2)
 }
 
+// ShortName track name usable by OS (filename...)
 func (t Track) ShortName() string {
 	return strings.ReplaceAll(t.Name, " ", "")
 }
 
+// ImageFileName name of aerial map file
 func (t Track) ImageFileName(path string) string {
 	return filepath.Join(path, fmt.Sprintf("%s.png", t.ShortName()))
 }
 
+// UpdateMap read given image will be used as aerial image
 func (t *Track) UpdateMap(path string) (err error) {
 	if t.Map != nil {
 		// map already loaded
@@ -89,6 +99,7 @@ func (t Track) PosToXY(r image.Rectangle, lat, lon float64) (x, y int) {
 	return
 }
 
+// Crossed do we cross line and when
 func Crossed(line Line, g1, g2 Timely) (t time.Time) {
 	g1Side := line.To(g1.Value.(GPS5))
 	g2Side := line.To(g2.Value.(GPS5))
@@ -138,6 +149,7 @@ func Distance(g1, g2 GPS5) float64 {
 	return 2 * r * math.Asin(math.Sqrt(h))
 }
 
+// LapCounter keep all trak lap
 type LapCounter struct {
 	track       *Track
 	laps        [][]time.Time
@@ -150,7 +162,7 @@ type LapCounter struct {
 	prevstatus []int
 }
 
-// NewLapCounter
+// NewLapCounter create a LapCounter from given track
 func NewLapCounter(track *Track) (l LapCounter) {
 	l.track = track
 	l.laps = make([][]time.Time, 0)
@@ -164,14 +176,17 @@ func NewLapCounter(track *Track) (l LapCounter) {
 	return
 }
 
+// Track associated track
 func (l LapCounter) Track() *Track {
 	return l.track
 }
 
+// SectorStatus status of each sector
 func (l LapCounter) SectorStatus() []int {
 	return l.status
 }
 
+// PrevStatus status of previsou sectors
 func (l LapCounter) PrevStatus() []int {
 	return l.prevstatus
 }
@@ -196,6 +211,7 @@ func (l *LapCounter) appendEmptyLap() {
 	l.laps = append(l.laps, make([]time.Time, 1+len(l.track.Sectors)))
 }
 
+// Update lapcounter with information at t
 func (l *LapCounter) Update(t time.Time, prev, current Timely) {
 	// New lap ?
 	if newStart := l.track.NewLapStart(prev, current); !newStart.IsZero() {

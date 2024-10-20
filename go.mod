@@ -3,9 +3,9 @@ module github.com/Serli/gokart
 go 1.23.2
 
 require (
-	github.com/cedricjoulain/gopro-utils v0.0.0-20241020100728-135774afa08f
+	github.com/cedricjoulain/gopro-utils v0.0.0-20241020122436-c58588334857
 	github.com/u2takey/ffmpeg-go v0.5.0
-	gocv.io/x/gocv v0.25.0
+	gocv.io/x/gocv v0.39.0
 )
 
 require (

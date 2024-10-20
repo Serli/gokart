@@ -9,7 +9,7 @@ import (
 // GPS5 enriched GPS5 from telemetry
 type GPS5 struct {
 	telemetry.GPS5
-	Accuracy uint16 // gps accuracy in cm
+	Accuracy uint16 `json:"accuracy,omitempty"` // gps accuracy in cm
 }
 
 // NewGPS5 simple constructor from Latitude and Longitude
@@ -22,8 +22,8 @@ func NewGPS5(lat, lon float64) (g GPS5) {
 // Line two points defining a "line" like start line
 // can also be used for segment
 type Line struct {
-	P1 GPS5
-	P2 GPS5
+	P1 GPS5 `json:"p1"`
+	P2 GPS5 `json:"p2"`
 }
 
 func (l Line) IsZero() bool {
