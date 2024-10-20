@@ -11,7 +11,6 @@ Some tests are available, create a `data` folder and download video example:
 [20240914T1112_Ancenis.mp4](https://drive.google.com/file/d/15jsj2EUC1Xuy-kCqMmxUHkDCcQakrYSN/view?usp=drive_link)
 
 ```bash
-mkdir data
 mv ~/Downloads/20240914T1112_Ancenis.mp4 data
 go test
 ```
