@@ -1,5 +1,11 @@
 github.com/aws/aws-sdk-go v1.38.20 h1:QbzNx/tdfATbdKfubBpkt84OM6oBkxQZRw6+bW2GyeA=
 github.com/aws/aws-sdk-go v1.38.20/go.mod h1:hcU610XS61/+aQV88ixoOzUoG7v3b31pl2zKMmprdro=
+github.com/aws/aws-sdk-go v1.55.5 h1:KKUZBfBoyqy5d3swXyiC7Q76ic40rYcbqH7qjh59kzU=
+github.com/aws/aws-sdk-go v1.55.5/go.mod h1:eRwEWoyTWFMVYVQzKMNHWP5/RV4xIUGMQfXQHfHkpNU=
+github.com/cedricjoulain/gopro-utils v0.0.0-20190102034544-f0186d2edd34 h1:a4jiHhtjfzH3ztVXCYowGw/RtLKhC1xkHaa8qOpfPF8=
+github.com/cedricjoulain/gopro-utils v0.0.0-20190102034544-f0186d2edd34/go.mod h1:Omfx12GAkYTwuPX0tuiSVH8TjHPc10C5IzsCJ3sBqEs=
+github.com/cedricjoulain/gopro-utils v0.0.0-20241020100728-135774afa08f h1:Yr8ic/UMfaDcnU3qJH1ZW4RQn+YnKJTVNTeDS06JxZw=
+github.com/cedricjoulain/gopro-utils v0.0.0-20241020100728-135774afa08f/go.mod h1:Omfx12GAkYTwuPX0tuiSVH8TjHPc10C5IzsCJ3sBqEs=
 github.com/davecgh/go-spew v1.1.0/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/davecgh/go-spew v1.1.1 h1:vj9j/u1bqnvCEfJOwUhtlOARqs3+rkHYY13jYWTU97c=
 github.com/davecgh/go-spew v1.1.1/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
@@ -31,8 +37,6 @@ github.com/pkg/errors v0.9.1/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINE
 github.com/pmezard/go-difflib v1.0.0 h1:4DBwDE0NGyQoBHbLQYPwSUPoCMWR5BEzIk/f1lZbAQM=
 github.com/pmezard/go-difflib v1.0.0/go.mod h1:iKH77koFhYxTK1pcRnkKkqfTogsbg7gZNVY4sRDYZ/4=
 github.com/spf13/afero v1.2.2/go.mod h1:9ZxEEn6pIJ8Rxe320qSDBk6AsU0r9pR7Q4OcevTdifk=
-github.com/stilldavid/gopro-utils v0.0.0-20190102034544-f0186d2edd34 h1:kkEr2edDCZnCFy/spYfPehUt1OFG1qdeixQyQy147Dk=
-github.com/stilldavid/gopro-utils v0.0.0-20190102034544-f0186d2edd34/go.mod h1:5K3+/xzJDEwdfJSPFbaIXWuVkTp0HtliZD3acla0YXQ=
 github.com/stretchr/objx v0.1.0/go.mod h1:HFkY916IF+rwdDfMAkV7OtwuqBVzrE8GR6GFx+wExME=
 github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UVUgZn+9EI=
 github.com/stretchr/testify v1.4.0/go.mod h1:j7eGeouHqKxXV5pUuKE4zz7dFj8WfuZ+81PSLYec5m4=

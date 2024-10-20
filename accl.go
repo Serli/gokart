@@ -4,7 +4,7 @@ import (
 	"math"
 	"time"
 
-	"github.com/stilldavid/gopro-utils/telemetry"
+	"github.com/cedricjoulain/gopro-utils/telemetry"
 )
 
 type ACCL telemetry.ACCL

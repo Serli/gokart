@@ -11,7 +11,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/stilldavid/gopro-utils/telemetry"
+	"github.com/cedricjoulain/gopro-utils/telemetry"
 	ffmpeg "github.com/u2takey/ffmpeg-go"
 )
 

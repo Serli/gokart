@@ -3,7 +3,7 @@ package gokart
 import (
 	"time"
 
-	"github.com/stilldavid/gopro-utils/telemetry"
+	"github.com/cedricjoulain/gopro-utils/telemetry"
 )
 
 // GPS5 enriched GPS5 from telemetry
