@@ -9,7 +9,7 @@ import (
 	"path/filepath"
 	"runtime"
 
-	"gokart"
+	"github.com/Serli/gokart"
 )
 
 // Ensure that main.main runs on main thread.

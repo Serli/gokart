@@ -10,7 +10,7 @@ import (
 
 	"gocv.io/x/gocv"
 
-	"gokart"
+	"github.com/Serli/gokart"
 )
 
 // Ensure that main.main runs on main thread.
