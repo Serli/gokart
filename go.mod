@@ -1,4 +1,4 @@
-module gokart
+module github.com/Serli/gokart
 
 go 1.23.2
 
