@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"flag"
 	"fmt"
 	"log"
+	"os"
 	"path/filepath"
 	"runtime"
 	"time"
@@ -20,6 +22,7 @@ func init() {
 
 func main() {
 	inName := flag.String("in", filepath.Join("..", "..", "data", "20240914T1112_Ancenis.mp4"), "Required: GoPro MP4 file to read")
+	outPath := flag.String("path", ".", "path to store generated files")
 	start := flag.Int("start", 0, "Start frame number")
 	stop := flag.Int("stop", -1, "Stop frame number")
 	export := flag.Bool("export", false, "Export each image as frame_{number}.png WARNING can fill your drive!!!!")
@@ -31,6 +34,7 @@ func main() {
 	}
 	var (
 		webcam *gocv.VideoCapture
+		data   []byte
 		err    error
 	)
 	// open webcam
@@ -76,11 +80,21 @@ func main() {
 				"frame %d latitude:%f longitude:%f accuracy (in cm):%d\n",
 				count, pos.Latitude, pos.Longitude, pos.Accuracy)
 			if *export {
+				path := filepath.Join(*outPath, fmt.Sprintf("part%03d", count/1000))
+				os.MkdirAll(path, os.ModePerm)
+				// write image
 				gocv.IMWrite(
-					fmt.Sprintf(
-						"frame_%d_%f_%f_%d.png",
-						count, pos.Latitude, pos.Longitude, pos.Accuracy),
+					filepath.Join(path, fmt.Sprintf("frame_%d.png", count)),
 					img)
+				if data, err = json.MarshalIndent(pos, "", "  "); err != nil {
+					return
+				}
+				// write json !
+				if err = os.WriteFile(
+					filepath.Join(path, fmt.Sprintf("frame_%d.json", count)),
+					data, os.ModePerm); err != nil {
+					return
+				}
 			}
 		}
 	}
