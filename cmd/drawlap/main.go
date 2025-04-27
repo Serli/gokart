@@ -23,6 +23,7 @@ func main() {
 	lap := flag.Int("lap", 0, "Lap number to draw (0 for best)")
 	mode := flag.String("mode", "acc", "Info to graph, speed or acc")
 	path := flag.String("path", filepath.Join("..", "..", "data"), "Path for aerial images storage")
+	debug := flag.Bool("debug", false, "Debug mode, more verbose")
 	flag.Parse()
 
 	if *inName == "" {
@@ -39,6 +40,9 @@ func main() {
 	lapCounter := gokart.NewLapCounter(track)
 	fmt.Println("Track:", track.Name)
 	for gps_index := range gps {
+		if *debug {
+			log.Println(gps_index, track.To(gps[gps_index].Value.(gokart.GPS5)), gps[gps_index])
+		}
 		if gps_index == 0 {
 			// need at least 2 points
 			continue
